@@ -1,0 +1,24 @@
+create database webapptestdb;
+use webapptestdb;
+
+CREATE TABLE `mologs` (
+  `MoId` varchar(36) NOT NULL,
+  `MobileNo` varchar(255) DEFAULT NULL,
+  `Keyword` varchar(255) DEFAULT NULL,
+  `Name` varchar(50) DEFAULT NULL,
+  `NRIC` varchar(255) DEFAULT NULL,
+  `Amount` decimal(8,2) DEFAULT NULL,
+  `DateTimeStamp` datetime DEFAULT NULL,
+  `MoData` varchar(4095) DEFAULT NULL,
+  PRIMARY KEY (`MoId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `mtlogs` (
+  `MtId` varchar(36) NOT NULL,
+  `MoId` varchar(36) DEFAULT NULL,
+  `Reply` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`MtId`),
+  KEY `FK_mtlogs_mologs` (`MoId`),
+  CONSTRAINT `FK_mtlogs_mologs` FOREIGN KEY (`MoId`) REFERENCES `mologs` (`MoId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
